@@ -66,6 +66,7 @@ typedef SelectedIndexCallback = void Function(int);
 typedef TimePickerCallback = void Function(DateTime);
 
 class TimePickerSpinner extends StatefulWidget {
+  final int visibleItemCount;
   final DateTime? time;
   final int minutesInterval;
   final int secondsInterval;
@@ -83,6 +84,7 @@ class TimePickerSpinner extends StatefulWidget {
   TimePickerSpinner(
       {Key? key,
       this.time,
+      this.visibleItemCount = 3,
       this.minutesInterval = 1,
       this.secondsInterval = 1,
       this.is24HourMode = true,
@@ -229,7 +231,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     List<Widget> contents = [
       SizedBox(
         width: _getItemWidth(),
-        height: _getItemHeight()! * 3,
+        height: _getItemHeight()! * widget.visibleItemCount,
         child: spinner(
           hourController,
           _getHourCount(),
@@ -246,7 +248,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       spacer(),
       SizedBox(
         width: _getItemWidth(),
-        height: _getItemHeight()! * 3,
+        height: _getItemHeight()! * widget.visibleItemCount,
         child: spinner(
           minuteController,
           _getMinuteCount(),
@@ -266,7 +268,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       contents.add(spacer());
       contents.add(SizedBox(
         width: _getItemWidth(),
-        height: _getItemHeight()! * 3,
+        height: _getItemHeight()! * widget.visibleItemCount,
         child: spinner(
           secondController,
           _getSecondCount(),
