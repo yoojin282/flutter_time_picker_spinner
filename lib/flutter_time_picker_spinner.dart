@@ -112,6 +112,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
   int currentSelectedMinuteIndex = -1;
   int currentSelectedSecondIndex = -1;
   int currentSelectedAPIndex = -1;
+
   DateTime? currentTime;
   bool isHourScrolling = false;
   bool isMinuteScrolling = false;
@@ -189,20 +190,21 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
   @override
   void initState() {
+    int indexOffset = widget.visibleItemCount ~/ 2;
     currentTime = widget.time == null ? DateTime.now() : widget.time;
 
     currentSelectedHourIndex =
         (currentTime!.hour % (widget.is24HourMode ? 24 : 12)) + _getHourCount();
     hourController = ScrollController(
         initialScrollOffset:
-            (currentSelectedHourIndex - 1) * _getItemHeight()!);
+            (currentSelectedHourIndex - indexOffset) * _getItemHeight()!);
 
     currentSelectedMinuteIndex =
         (currentTime!.minute / widget.minutesInterval).floor() +
             (isLoop(_getMinuteCount()) ? _getMinuteCount() : 1);
     minuteController = ScrollController(
         initialScrollOffset:
-            (currentSelectedMinuteIndex - 1) * _getItemHeight()!);
+            (currentSelectedMinuteIndex - indexOffset) * _getItemHeight()!);
     //print(currentSelectedMinuteIndex);
     //print((currentSelectedMinuteIndex - 1) * _getItemHeight()!);
 
@@ -211,7 +213,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
             (isLoop(_getSecondCount()) ? _getSecondCount() : 1);
     secondController = ScrollController(
         initialScrollOffset:
-            (currentSelectedSecondIndex - 1) * _getItemHeight()!);
+            (currentSelectedSecondIndex - indexOffset) * _getItemHeight()!);
 
     currentSelectedAPIndex = currentTime!.hour >= 12 ? 2 : 1;
     apController = ScrollController(
