@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 void main() => runApp(MyApp());
@@ -58,10 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.only(top: 100),
           child: new Column(
             children: <Widget>[
-//            hourMinute12H(),
-              hourMinute15Interval(),
-//            hourMinuteSecond(),
-//            hourMinute12HCustomStyle(),
+              // hourMinute12H(),
+//               hourMinute15Interval(),
+              hourMinuteSecond(),
+//               hourMinute12HCustomStyle(),
               new Container(
                 margin: EdgeInsets.symmetric(vertical: 50),
                 child: new Text(
@@ -80,7 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// SAMPLE
   Widget hourMinute12H() {
-    return new TimePickerSpinner(
+    return TimePickerSpinner(
+      visibleItemCount: 7,
+      isForce2Digits: true,
       is24HourMode: false,
       onTimeChange: (time) {
         setState(() {
@@ -91,7 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget hourMinuteSecond() {
-    return new TimePickerSpinner(
+    return TimePickerSpinner(
+      visibleItemCount: 3,
+      isForce2Digits: true,
       isShowSeconds: true,
       onTimeChange: (time) {
         setState(() {
@@ -102,7 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget hourMinute15Interval() {
-    return new TimePickerSpinner(
+    return TimePickerSpinner(
+      visibleItemCount: 7,
       spacing: 40,
       minutesInterval: 15,
       onTimeChange: (time) {
@@ -114,7 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget hourMinute12HCustomStyle() {
-    return new TimePickerSpinner(
+    return TimePickerSpinner(
+      visibleItemCount: 7,
       is24HourMode: false,
       normalTextStyle: TextStyle(fontSize: 24, color: Colors.deepOrange),
       highlightedTextStyle: TextStyle(fontSize: 24, color: Colors.yellow),
